@@ -6,13 +6,17 @@
   apt_repository:
     repo: deb https://download.docker.com/linux/ubuntu jammy stable
 
-- name: Install Docker CE
+- name: Install Docker and other packages
   apt:
     name:
       - apt-transport-https
       - ca-certificates
       - curl
       - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
       - python3-pip
       - python3-setuptools
       - software-properties-common
@@ -22,6 +26,7 @@
   service:
     name: docker
     state: started
+    enabled: yes
 
 - name: Add permission to Docker for current user
   shell: chmod 666 /var/run/docker.sock
